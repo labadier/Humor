@@ -1,0 +1,12 @@
+matplotlib
+progress
+transformers
+emoji
+pandas
+torch
+sklearn
+scipy
+numpy
+torch
+networkx
+googletrans==3.1.0a0
