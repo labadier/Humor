@@ -8,7 +8,7 @@ from googletrans import Translator
 def load_data(filename):
 
   dataframe = pd.read_csv(filename, dtype=str)
-  data = {key:dataframe[key].to_numpy()[:20] if key != 'humor' else dataframe['humor'].astype(int).to_numpy()[:20] for key in dataframe.columns}
+  data = {key:dataframe[key].to_numpy() if key != 'humor' else dataframe['humor'].astype(int).to_numpy() for key in dataframe.columns}
   return data
 
 def plot_training(history, model, measure='loss'):

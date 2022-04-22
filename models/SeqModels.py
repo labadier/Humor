@@ -123,7 +123,7 @@ def sigmoid( z ):
   return 1./(1 + torch.exp(-z))
 
 def compute_acc(ground_truth, predictions):
-  return((1.0*(torch.max(predictions, 1).indices == ground_truth)).sum()/len(ground_truth)).cpu().numpy()
+  return((1.0*(torch.max(predictions, 1).indices == ground_truth)).sum()/len(ground_truth)).item()
 
 
 def train_model(model_name, model, trainloader, devloader, epoches, lr, decay, output, split=1):
@@ -201,7 +201,7 @@ def train_model(model_name, model, trainloader, devloader, epoches, lr, decay, o
       band = True
 
     # ep_finish_print = f' acc: {acc:.3f} | dev_loss: {dev_loss:.3f} dev_acc: {dev_acc.reshape(-1)[0]:.3f}'
-    ep_finish_print = f' acc: {acc} | dev_loss: {dev_loss:.3f} dev_acc: {dev_acc.reshape(-1)}'
+    ep_finish_print = f' acc: {acc:.3f} | dev_loss: {dev_loss:.3f} dev_acc: {dev_acc:.3f}'
 
     if band == True:
       print(bcolors.OKBLUE + bcolors.BOLD + last_printed + ep_finish_print + '\t[Weights Updated]' + bcolors.ENDC)
