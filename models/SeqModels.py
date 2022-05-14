@@ -94,7 +94,7 @@ class SeqModel(torch.nn.Module):
         for batch in devloader:   
           dev_out = self.forward(batch['text'], get_encoding=encode).cpu().numpy()
           for i in range(len(batch['text'])):
-            spamwriter.writerow([data[key][i] if key != 'text' else (' '.join([str(j) for j in dev_out[i]]) if encode else np.argmax(dev_out[i])) for key in data.keys()])
+            spamwriter.writerow([batch[key][i] if key != 'text' else (' '.join([str(j) for j in dev_out[i]]) if encode else np.argmax(dev_out[i])) for key in batch.keys()])
       
 
 

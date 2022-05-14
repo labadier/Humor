@@ -1,7 +1,8 @@
 import argparse, sys, os, numpy as np, torch, random
+
 from utils.params import params, bcolors
 from utils.utils import mergeData, TranslatePivotLang, backTranslation
-from utils.utils import load_data, plot_training
+from utils.utils import load_data, plot_training, evaluate
 from models.SeqModels import train_model_CV, SeqModel, train_model_dev
 
 torch.manual_seed(0)
@@ -80,7 +81,7 @@ if __name__ == '__main__':
       if os.path.exists(output) == False:
         os.system(f'mkdir {output}')
 
-      dataTrain = load_data(tf)
+      dataTrain = load_data(tf, lang)
       history = None
       
       if df is None:
@@ -88,7 +89,7 @@ if __name__ == '__main__':
                       batch_size=batch_size, max_length=max_length, interm_layer_size = interm_layer_size, 
                       lr = learning_rate,  decay=decay, output=output, model_mode=weights_mode)
       else:
-        dataDev = load_data(df)
+        dataDev = load_data(df, lang)
         history = train_model_dev(model_name=params.models[lang].split('/')[-1], lang=lang, data_train=dataTrain, data_dev=dataDev,
                       epoches=epoches, batch_size=batch_size, max_length=max_length, 
                       interm_layer_size = interm_layer_size, lr = learning_rate,  decay=decay, 
@@ -124,4 +125,8 @@ if __name__ == '__main__':
       backTranslation(output)
 
       print(f"{bcolors.OKCYAN}{bcolors.BOLD}Data Translated!!{bcolors.ENDC}")
+    exit(0)
+
+  if model == 'eval':
+    evaluate(df)
     exit(0)

@@ -1,13 +1,18 @@
 import pandas as pd, numpy as np, os, csv, time, random
-from sklearn.metrics import f1_score, accuracy_score
-from utils.params import params
+from sklearn.metrics import f1_score, accuracy_score, classification_report
+from utils.params import params, bcolors
 from matplotlib import pyplot as plt
 
 from googletrans import Translator 
 
-def load_data(filename):
+def load_data(filename, lang):
 
   dataframe = pd.read_csv(filename, dtype=str)
+  if lang == 'es':
+    dataframe = dataframe[dataframe['source'] == 'Haha']
+  elif lang == 'en':
+    dataframe = dataframe[dataframe['source'] != 'Haha']
+
   data = {key:dataframe[key].to_numpy() if key != 'humor' else dataframe['humor'].astype(int).to_numpy() for key in dataframe.columns}
   return data
 
@@ -127,21 +132,24 @@ def backTranslation(sourceFile = 'train', step = 29, t_lang = ['es']) -> None:
           
         print(f'\r{pivot} -> {back_target}: 100%\t')
 
-def evaluate(input, task):
+def evaluate(file_path):
 
 
-  labels = ['non-sexist', 'sexist'] if task == 1 else ['non-sexist'] + params.columns_exist
-  file = pd.read_csv(input, sep='\t',  dtype=str, header=None).sort_values(by=[1])
+  sources = ['Haha', 'HaHackathon', 'joker']
 
-  gold = pd.read_csv(f'data/EXIST/training/EXIST2021_test.tsv', sep='\t',  dtype=str, usecols=['id', f'task{task}']).sort_values(by=['id'])
+  file = pd.read_csv(file_path)
 
-  y = []
-  y_hat = []
-  for i in range(len(gold)):
-    if file.iloc[i][1] != gold.iloc[i]['id']:
-      print('Wrong arrangemet')
-    y_hat += [labels.index(file.iloc[i][2])]
-    y += [labels.index(gold.iloc[i][f'task{task}'])]
+  for i in sources:
 
-  
-  print(f"acc: {accuracy_score(y, y_hat):.4f}\nf1: {f1_score(y, y_hat, average='macro'):.4f}")
+    print(f"{bcolors.OKGREEN}{bcolors.BOLD}== {i} Report == {bcolors.ENDC}") 
+    data = file[file['source'] == i]
+
+    y_hat = data['prediction' if 'prediction' in data.columns else 'is_humor'].as_type(int).to_numpy()
+    y = data['ground_humor'].as_type(int).to_numpy()
+    print(classification_report(y, y_hat, target_names=['non-humor', 'humor'],  digits=3, zero_division=1))
+
+  print(f"{bcolors.OKBLUE}{bcolors.BOLD}{'='*10}\n== Overall Report == {bcolors.ENDC}") 
+
+  y_hat = file['prediction' if 'prediction' in file.columns else 'is_humor'].as_type(int).to_numpy()
+  y = file['ground_humor'].as_type(int).to_numpy()
+  print(classification_report(y, y_hat, target_names=['non-humor', 'humor'],  digits=3, zero_division=1))
