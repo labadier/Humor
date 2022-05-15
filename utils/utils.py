@@ -69,7 +69,7 @@ def TranslatePivotLang(sourceFile = 'data/train.csv', outputFile = 'train', step
   perc = 0
   data_frame = pd.read_csv(sourceFile, dtype=str)
 
-  with open(f'data/{outputFile}_inverted.csv', 'wt', newline='', encoding="utf-8") as csvfile:
+  with open(f'data/{outputFile}_back.csv', 'wt', newline='', encoding="utf-8") as csvfile:
     spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     spamwriter.writerow(list(data_frame.columns))
     
@@ -86,8 +86,8 @@ def TranslatePivotLang(sourceFile = 'data/train.csv', outputFile = 'train', step
         time.sleep(random.random()*3)
         try:
           data['text'] = (ts.translate(text='\n'.join(data['text'].to_list()), 
-                              src = 'es' if data.iloc[0]['source'] == 'Haha' else 'en', 
-                              dest = 'en' if data.iloc[0]['source'] == 'Haha' else 'es').text).split('\n')
+                              src = 'es' if not(data.iloc[0]['source'] == 'Haha') else 'en', 
+                              dest = 'en' if not(data.iloc[0]['source'] == 'Haha') else 'es').text).split('\n')
         except:
           print(f'An exception occurred on index {i}')
 
@@ -95,8 +95,8 @@ def TranslatePivotLang(sourceFile = 'data/train.csv', outputFile = 'train', step
         ts = Translator()
         for j in range(step):
           data.iloc[j]['text'] = ts.translate(text=data.iloc[j]['text'], 
-                        src = 'es' if data.iloc[j]['source'] == 'Haha' else 'en',
-                        dest = 'en' if data.iloc[j]['source'] == 'Haha' else 'es').text
+                        src = 'es' if not(data.iloc[j]['source'] == 'Haha') else 'en',
+                        dest = 'en' if not(data.iloc[j]['source'] == 'Haha') else 'es').text
           time.sleep(random.random()*3)
 
       for j in data.iterrows():
@@ -144,21 +144,25 @@ def backTranslation(sourceFile = 'train', step = 29, t_lang = ['es']) -> None:
 def evaluate(file_path):
 
 
-  sources = ['Haha', 'HaHackathon', 'joker']
+  sources = ['HaHackathon', 'joker', 'hedlines', 'Haha']
 
   file = pd.read_csv(file_path)
 
   for i in sources:
 
-    print(f"{bcolors.OKGREEN}{bcolors.BOLD}== {i} Report == {bcolors.ENDC}") 
+     
     data = file[file['source'] == i]
+    if not len(data):
+      continue
+  
+    print(f"{bcolors.OKGREEN}{bcolors.BOLD}== {i} Report == {bcolors.ENDC}")
 
-    y_hat = data['prediction' if 'prediction' in data.columns else 'is_humor'].as_type(int).to_numpy()
-    y = data['ground_humor'].as_type(int).to_numpy()
+    y_hat = data['prediction' if 'prediction' in data.columns else 'is_humor'].astype(int).to_numpy()
+    y = data['ground_humor'].astype(int).to_numpy()
     print(classification_report(y, y_hat, target_names=['non-humor', 'humor'],  digits=3, zero_division=1))
 
   print(f"{bcolors.OKBLUE}{bcolors.BOLD}{'='*10}\n== Overall Report == {bcolors.ENDC}") 
 
-  y_hat = file['prediction' if 'prediction' in file.columns else 'is_humor'].as_type(int).to_numpy()
-  y = file['ground_humor'].as_type(int).to_numpy()
+  y_hat = file['prediction' if 'prediction' in file.columns else 'is_humor'].astype(int).to_numpy()
+  y = file['ground_humor'].astype(int).to_numpy()
   print(classification_report(y, y_hat, target_names=['non-humor', 'humor'],  digits=3, zero_division=1))
