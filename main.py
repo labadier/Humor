@@ -122,7 +122,7 @@ if __name__ == '__main__':
       print(f"{bcolors.OKCYAN}{bcolors.BOLD}Dataset Made!!{bcolors.ENDC}")
     else:
       TranslatePivotLang(tf, output)
-      backTranslation(output)
+      # backTranslation(output)
 
       print(f"{bcolors.OKCYAN}{bcolors.BOLD}Data Translated!!{bcolors.ENDC}")
     exit(0)

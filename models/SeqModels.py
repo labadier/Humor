@@ -194,18 +194,19 @@ def train_model(model_name, model, trainloader, devloader, epoches, lr, decay, o
       edev_acc.append(dev_acc) 
 
     band = False
+    ep_finish_print = f' acc: {acc:.3f} | dev_loss: {dev_loss:.3f} dev_acc: {dev_acc:.3f}'
 
     if model.best_acc is None or model.best_acc < dev_acc:
       model.save(os.path.join(output, f'{model_name}_{split}.pt'))
       model.best_acc = dev_acc
       band = True
 
-    # ep_finish_print = f' acc: {acc:.3f} | dev_loss: {dev_loss:.3f} dev_acc: {dev_acc.reshape(-1)[0]:.3f}'
-    ep_finish_print = f' acc: {acc:.3f} | dev_loss: {dev_loss:.3f} dev_acc: {dev_acc:.3f}'
-
     if band == True:
       print(bcolors.OKBLUE + bcolors.BOLD + last_printed + ep_finish_print + '\t[Weights Updated]' + bcolors.ENDC)
     else: print(last_printed + ep_finish_print)
+    
+    with open('logs.txt', 'a') as file:
+      file.write(f"\n {model_name}: {last_printed + ep_finish_print} \n")
 
   return {'loss': eloss, 'acc': eacc, 'dev_loss': edev_loss, 'dev_acc': edev_acc}
 

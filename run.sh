@@ -15,29 +15,25 @@ python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv
 python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l ml -bs 64 -epoches 8 -df data/test.csv
 
 
-# #monolingual
-# # Encode test - train
-# python main.py -model encoder -mode encode -wm online -l en -bs 64 -df data/test.csv -output logs -wp logs/bertweet-base_1.pt
-# python main.py -model encoder -mode encode -wm online -l en -bs 64 -df data/train.csv -output logs -wp logs/bertweet-base_1.pt
+#monolingual
+# Encode test - train
+python main.py -model encoder -mode encode -wm online -l en -bs 64 -df data/test.csv -output logs -wp logs/bertweet-base_1.pt
+python main.py -model encoder -mode encode -wm online -l es -bs 64 -df data/test.csv -output logs -wp logs/bert-base-spanish-wwm-cased_1.pt
+python main.py -model encoder -mode encode -wm online -l en -bs 64 -df data/train.csv -output logs -wp logs/bertweet-base_1.pt
+python main.py -model encoder -mode encode -wm online -l es -bs 64 -df data/train.csv -output logs -wp logs/bert-base-spanish-wwm-cased_1.pt
 
-# # Predict test
-# python main.py -model encoder -mode predict -wm online -l en -bs 64 -df data/test.csv -output logs -wp logs/bertweet-base_1.pt
+# Predict test - train
+python main.py -model encoder -mode predict -wm online -l en -bs 64 -df data/test.csv -output logs -wp logs/bertweet-base_1.pt
+python main.py -model encoder -mode predict -wm online -l es -bs 64 -df data/test.csv -output logs -wp logs/bert-base-spanish-wwm-cased_1.pt
+python main.py -model encoder -mode predict -wm online -l es -bs 64 -df data/train.csv -output logs -wp logs/bert-base-spanish-wwm-cased_1.pt
+python main.py -model encoder -mode predict -wm online -l en -bs 64 -df data/train.csv -output logs -wp logs/bertweet-base_1.pt
 
-# # Encode Predict test backtranslated
-# python main.py -model encoder -mode encode -wm online -l en -bs 64 -df data/test_backTo_en.csv -output logs -wp logs/bertweet-base_1.pt
-# python main.py -model encoder -mode predict -wm online -l en -bs 64 -df data/test_backTo_en.csv -output logs -wp logs/bertweet-base_1.pt
 
-# ### multilingual
+#multilingual
+# Encode test - train
+python main.py -model encoder -mode encode -wm online -l ml -bs 64 -df data/test.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_1.pt
+python main.py -model encoder -mode encode -wm online -l ml -bs 64 -df data/train.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_1.pt
 
-# python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l ml -bs 64 -epoches 8 -df data/test.csv
-
-# # Encode test - train
-# python main.py -model encoder -mode encode -wm online -l ml -bs 64 -df data/test.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_1.pt
-# python main.py -model encoder -mode encode -wm online -l ml -bs 64 -df data/train.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_1.pt
-
-# # Predict test
-# python main.py -model encoder -mode predict -wm online -l ml -bs 64 -df data/test.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_1.pt
-
-# # Encode Predict test Translated
-# python main.py -model encoder -mode encode -wm online -l ml -bs 64 -df data/test_es.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_1.pt
-# python main.py -model encoder -mode predict -wm online -l ml -bs 64 -df data/test_es.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_1.pt
+# Predict test
+python main.py -model encoder -mode predict -wm online -l ml -bs 64 -df data/test.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_1.pt
+python main.py -model encoder -mode predict -wm online -l ml -bs 64 -df data/train.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_1.pt
