@@ -58,18 +58,20 @@ def mergeData(mode) -> None:
     data = pd.read_csv(f'data/semeval-2020-task-7-dataset-headlines/{mode}.csv')
     for row in data.iterrows():
       if float(row[1]['meanGrade']) > 2.0:
-        spamwriter.writerow(['hedlines', row[1]['id'], row[1]['original'].replace('\n', ' '), 0])
-        spamwriter.writerow(['hedlines', row[1]['id'], row[1]['edit'].replace('\n', ' '), 1])
+        trans =  row[1]['original'].replace('\n', ' ')        
+        spamwriter.writerow(['headlines', row[1]['id'], trans.replace('<', '').replace('/>', ''), 0])
+        b = trans.find('<')
+        e = trans.find('>')
+        spamwriter.writerow(['headlines', row[1]['id']*2, trans[:b] + row[1]['edit'].replace('\n', ' ') + trans[e+1:], 1])
 
 def TranslatePivotLang(sourceFile = 'data/train.csv', outputFile = 'train', step=29) -> None:
-
 
   print(f'Pivot Language: 0%\r', end="")
 
   perc = 0
   data_frame = pd.read_csv(sourceFile, dtype=str)
 
-  with open(f'data/{outputFile}_back.csv', 'wt', newline='', encoding="utf-8") as csvfile:
+  with open(f'data/{outputFile}_inverted.csv', 'wt', newline='', encoding="utf-8") as csvfile:
     spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     spamwriter.writerow(list(data_frame.columns))
     
@@ -86,8 +88,8 @@ def TranslatePivotLang(sourceFile = 'data/train.csv', outputFile = 'train', step
         time.sleep(random.random()*3)
         try:
           data['text'] = (ts.translate(text='\n'.join(data['text'].to_list()), 
-                              src = 'es' if not(data.iloc[0]['source'] == 'Haha') else 'en', 
-                              dest = 'en' if not(data.iloc[0]['source'] == 'Haha') else 'es').text).split('\n')
+                              src = 'es' if (data.iloc[0]['source'] == 'Haha') else 'en', 
+                              dest = 'en' if (data.iloc[0]['source'] == 'Haha') else 'es').text).split('\n')
         except:
           print(f'An exception occurred on index {i}')
 
@@ -95,8 +97,8 @@ def TranslatePivotLang(sourceFile = 'data/train.csv', outputFile = 'train', step
         ts = Translator()
         for j in range(step):
           data.iloc[j]['text'] = ts.translate(text=data.iloc[j]['text'], 
-                        src = 'es' if not(data.iloc[j]['source'] == 'Haha') else 'en',
-                        dest = 'en' if not(data.iloc[j]['source'] == 'Haha') else 'es').text
+                        src = 'es' if (data.iloc[j]['source'] == 'Haha') else 'en',
+                        dest = 'en' if (data.iloc[j]['source'] == 'Haha') else 'es').text
           time.sleep(random.random()*3)
 
       for j in data.iterrows():
@@ -104,42 +106,48 @@ def TranslatePivotLang(sourceFile = 'data/train.csv', outputFile = 'train', step
         
     print(f'\rPivot Language : 100%\t')
 
-def backTranslation(sourceFile = 'train', step = 29, t_lang = ['es']) -> None:
-  
-  for back_target in ['en']:
+def backTranslation(sourceFile = 'data/train_inverted.csv', step=29) -> None:
 
-    data_frame = pd.read_csv(f'data/{sourceFile}_en.csv', dtype=str)
-    with open( f'data/{sourceFile}_backTo_{back_target}.csv', 'wt', newline='', encoding="utf-8") as csvfile:
-      spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-      spamwriter.writerow(list(data_frame.columns))
+  print(f'Pivot Language: 0%\r', end="")
 
-      for pivot in t_lang:
-        data_frame = pd.read_csv(f'data/{sourceFile}_{pivot}.csv', dtype=str)
-        data_frame['text'] = data_frame['text'].replace('\n', ' ')
+  perc = 0
+  data_frame = pd.read_csv(sourceFile, dtype=str)
 
-        print(f'{pivot} -> {back_target}: 0%\t\r', end = "")
-        perc = 0
+  with open(f"{sourceFile.split('_')[0]}_back.csv", 'wt', newline='', encoding="utf-8") as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    spamwriter.writerow(list(data_frame.columns))
+    
+    for i in range(0, len(data_frame), step):
+      
+      if (i*100.0)/len(data_frame) - perc > 0.25:
+        perc = (i*100.0)/len(data_frame)
+        print(f'Back Language: {perc:.2f}%\t\r', end = "")
 
-        for i in range(0, len(data_frame), step):
-            
-          if (i*100.0)/len(data_frame) - perc > 1:
-            perc = (i*100.0)/len(data_frame)
-            print(f'\r{pivot} -> {back_target}: {perc:.2f}%', end = "")
+      data = data_frame[i:i + step].copy() 
 
-          data = data_frame[i:i + step].copy() 
+      if len(set(data['source'].to_list())) == 1:
+        ts = Translator()
+        time.sleep(random.random()*3)
+        try:
+          data['text'] = (ts.translate(text='\n'.join(data['text'].to_list()), 
+                              src = 'es' if not (data.iloc[0]['source'] == 'Haha') else 'en', 
+                              dest = 'en' if not (data.iloc[0]['source'] == 'Haha') else 'es').text).split('\n')
+        except:
+          print(f'An exception occurred on index {i}')
 
-          if pivot != back_target:
-            ts = Translator()
-            time.sleep(random.random()*3)
-            try:
-              data['text'] = (ts.translate(text='\n'.join(data['text'].to_list()), src=pivot, dest=back_target).text).split('\n')
-            except:
-              print(f'An exception occurred on index {i}')
+      else:
+        ts = Translator()
+        for j in range(step):
+          data.iloc[j]['text'] = ts.translate(text=data.iloc[j]['text'], 
+                        src = 'es' if not (data.iloc[j]['source'] == 'Haha') else 'en',
+                        dest = 'en' if not (data.iloc[j]['source'] == 'Haha') else 'es').text
+          time.sleep(random.random()*3)
 
-          for j in data.iterrows():
-            spamwriter.writerow(j[1].to_list())
-          
-        print(f'\r{pivot} -> {back_target}: 100%\t')
+      for j in data.iterrows():
+        spamwriter.writerow(j[1].to_list())
+        
+    print(f'\rBack Language : 100%\t')
+
 
 def evaluate(file_path):
 

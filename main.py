@@ -121,8 +121,8 @@ if __name__ == '__main__':
       mergeData('test')
       print(f"{bcolors.OKCYAN}{bcolors.BOLD}Dataset Made!!{bcolors.ENDC}")
     else:
-      TranslatePivotLang(tf, output)
-      # backTranslation(output)
+      #TranslatePivotLang(tf, output)
+      backTranslation(tf)
 
       print(f"{bcolors.OKCYAN}{bcolors.BOLD}Data Translated!!{bcolors.ENDC}")
     exit(0)
