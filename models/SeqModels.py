@@ -126,7 +126,7 @@ def sigmoid( z ):
 def compute_acc(ground_truth, predictions):
   out = torch.max(predictions, 1).indices.detach().cpu().numpy()
 
-  return f1_score(out, ground_truth)
+  return f1_score(out, ground_truth.detach().cpu().numpy())
 
 
 def train_model(model_name, model, trainloader, devloader, epoches, lr, decay, output, split=1):
@@ -211,7 +211,7 @@ def train_model(model_name, model, trainloader, devloader, epoches, lr, decay, o
     with open('logs.txt', 'a') as file:
       file.write(f"\n {model_name}: {last_printed + ep_finish_print} \n")
 
-  return {'loss': eloss, 'acc': eacc, 'dev_loss': edev_loss, 'dev_acc': edev_acc}
+  return {'loss': eloss, 'f1': eacc, 'dev_loss': edev_loss, 'dev_f1': edev_acc}
 
 
 def train_model_CV(model_name, lang, data, splits = 5, epoches = 4, batch_size = 8, max_length = 120, 
