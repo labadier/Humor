@@ -5,6 +5,7 @@ from transformers import AutoModel, AutoTokenizer
 from torch.utils.data import Dataset, DataLoader
 from utils.params import params, bcolors
 from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import f1_score, accuracy_score
 
 class Data(Dataset):
 
@@ -123,7 +124,9 @@ def sigmoid( z ):
   return 1./(1 + torch.exp(-z))
 
 def compute_acc(ground_truth, predictions):
-  return((1.0*(torch.max(predictions, 1).indices == ground_truth)).sum()/len(ground_truth)).item()
+  out = torch.max(predictions, 1).indices.detach().numpy()
+
+  return f1_score(out, ground_truth)
 
 
 def train_model(model_name, model, trainloader, devloader, epoches, lr, decay, output, split=1):

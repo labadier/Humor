@@ -1,18 +1,18 @@
 #!/bin/bash
 
 # python main.py -model makedata -mode merge
-python main.py -model makedata -mode translate -tf data/train_inverted.csv -output train
-python main.py -model makedata -mode translate -tf data/test_inverted.csv -output test
+# python main.py -model makedata -mode translate -tf data/train_inverted.csv -output train
+# python main.py -model makedata -mode translate -tf data/test_inverted.csv -output test
 
 # #Train Models
 # #monolingual - en
-# python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l en -bs 64 -epoches 8 -df data/test.csv
+python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l en -bs 64 -epoches 8 -df data/test.csv
 
 # #monolingual - es
-# python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l es -bs 64 -epoches 8 -df data/test.csv
+python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l es -bs 64 -epoches 8 -df data/test.csv
 
 # #multilingual
-# python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l ml -bs 64 -epoches 8 -df data/test.csv
+python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l ml -bs 64 -epoches 8 -df data/test.csv
 
 
 # #monolingual
