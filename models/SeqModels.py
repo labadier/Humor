@@ -89,13 +89,13 @@ class SeqModel(torch.nn.Module):
     
     with open(outputFile, 'wt', newline='', encoding="utf-8") as csvfile:
       spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-      spamwriter.writerow(['source', 'index', 'encoding' if encode == True else 'prediction', 'ground_humor'])
+      spamwriter.writerow(['source', 'index', 'text', 'ground_humor', 'encoding' if encode == True else 'prediction'])
 
       with torch.no_grad():
         for batch in devloader:   
           dev_out = self.forward(batch['text'], get_encoding=encode).cpu().numpy()
           for i in range(len(batch['text'])):
-            spamwriter.writerow([batch[key][i] if key != 'text' else (' '.join([str(j) for j in dev_out[i]]) if encode else np.argmax(dev_out[i])) for key in batch.keys()])
+            spamwriter.writerow([batch[key][i] for key in batch.keys()] + [(' '.join([str(j) for j in dev_out[i]]) if encode else np.argmax(dev_out[i]))])
       
 
 
