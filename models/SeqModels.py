@@ -124,7 +124,7 @@ def sigmoid( z ):
   return 1./(1 + torch.exp(-z))
 
 def compute_acc(ground_truth, predictions):
-  out = torch.max(predictions, 1).indices.detach().numpy()
+  out = torch.max(predictions, 1).indices.detach().cpu().numpy()
 
   return f1_score(out, ground_truth)
 
@@ -250,7 +250,7 @@ def train_model_dev(model_name, lang, data_train, data_dev, epoches = 4, batch_s
   trainloader = DataLoader(Data(data_train), batch_size=batch_size, shuffle=True, num_workers=4, worker_init_fn=seed_worker)
   devloader = DataLoader(Data(data_dev), batch_size=batch_size, shuffle=True, num_workers=4, worker_init_fn=seed_worker)
 
-  history.append(train_model(model_name, model, trainloader, devloader, epoches, lr, decay, output))
+  history.append(train_model(model_name+lang, model, trainloader, devloader, epoches, lr, decay, output))
 
   del trainloader
   del model
