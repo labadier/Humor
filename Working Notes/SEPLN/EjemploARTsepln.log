@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.27)  9 NOV 2022 11:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.27)  10 NOV 2022 18:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -85,8 +85,8 @@ File: l3backend-pdftex.def 2022-07-01 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box51
 )
 (./EjemploARTsepln.aux
-LaTeX Info: Redefining \. on input line 9.
-LaTeX Info: Redefining \% on input line 9.
+LaTeX Info: Redefining \. on input line 8.
+LaTeX Info: Redefining \% on input line 8.
 )
 \openout1 = `EjemploARTsepln.aux'.
 
@@ -124,6 +124,57 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 65.
 
+Underfull \hbox (badness 2189) in paragraph at lines 70--76
+\OT1/cmr/m/n/10.95 per-cep-tion from one per-son to another.
+ []
+
+
+Underfull \hbox (badness 1062) in paragraph at lines 70--76
+\OT1/cmr/m/n/10.95 this pers-pec-ti-ve's loss. Par-ti-cu-larly, when
+ []
+
+
+Underfull \hbox (badness 2205) in paragraph at lines 70--76
+\OT1/cmr/m/n/10.95 in-for-ma-tion flows from one lan-gua-ge to
+ []
+
+
+Underfull \hbox (badness 1400) in paragraph at lines 70--76
+\OT1/cmr/m/n/10.95 lan-gua-ge de-pen-dent ex-pres-sions that can
+ []
+
+
+Underfull \hbox (badness 1215) in paragraph at lines 70--76
+\OT1/cmr/m/n/10.95 be po-ten-tially lost upon trans-la-tion in-to
+ []
+
+
+Underfull \hbox (badness 2538) in paragraph at lines 70--76
+\OT1/cmr/m/n/10.95 a dif-fe-rent lan-gua-ge, sin-ce they em-ploy
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--76
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--82
+
+ []
+
+
+Underfull \hbox (badness 1264) in paragraph at lines 77--82
+\OT1/cmr/m/n/10.95 There is no way to trans-la-te the ph-ra-
+ []
+
+
+Underfull \hbox (badness 1142) in paragraph at lines 77--82
+\OT1/cmr/m/n/10.95 Neural Mo-dels ha-ve pla-ce new in \OT1/cmr/m/it/10.95 sta-t
+es
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1
@@ -133,10 +184,12 @@ Non-PDF special ignored!
 
 
 
+] [2
+
 ]
 (./EjemploARTsepln.aux
-LaTeX Info: Redefining \. on input line 9.
-LaTeX Info: Redefining \% on input line 9.
+LaTeX Info: Redefining \. on input line 8.
+LaTeX Info: Redefining \% on input line 8.
 )
 
 LaTeX Font Warning: Size substitutions with differences
@@ -144,23 +197,24 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 2390 strings out of 478023
- 40535 string characters out of 5820212
- 367105 words of memory out of 5000000
- 20862 multiletter control sequences out of 15000+600000
- 475455 words of font info for 48 fonts, out of 8000000 for 9000
+ 2392 strings out of 478023
+ 40559 string characters out of 5820212
+ 370105 words of memory out of 5000000
+ 20863 multiletter control sequences out of 15000+600000
+ 475801 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,11n,62p,520b,363s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 55i,11n,62p,408b,363s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></opt
 /texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/texliv
 e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></opt/texlive/202
 2/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/texlive/2022/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></opt/texlive/2022/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr8.pfb>
-Output written on EjemploARTsepln.pdf (1 page, 85164 bytes).
+ts/type1/public/amsfonts/cm/cmr8.pfb></opt/texlive/2022/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmti10.pfb>
+Output written on EjemploARTsepln.pdf (2 pages, 101769 bytes).
 PDF statistics:
- 38 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
+ 46 PDF objects out of 1000 (max. 8388607)
+ 27 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
