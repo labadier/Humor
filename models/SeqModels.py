@@ -200,7 +200,7 @@ def train_model(model_name, model, trainloader, devloader, epoches, lr, decay, o
     ep_finish_print = f' acc: {acc:.3f} | dev_loss: {dev_loss:.3f} dev_acc: {dev_acc:.3f}'
 
     if model.best_acc is None or model.best_acc < dev_acc:
-      model.save(os.path.join(output, f'{model_name}_{split}.pt'))
+      model.save(os.path.join(output, f'{model_name}.pt'))
       model.best_acc = dev_acc
       band = True
 
@@ -250,7 +250,7 @@ def train_model_dev(model_name, lang, data_train, data_dev, epoches = 4, batch_s
   trainloader = DataLoader(Data(data_train), batch_size=batch_size, shuffle=True, num_workers=4, worker_init_fn=seed_worker)
   devloader = DataLoader(Data(data_dev), batch_size=batch_size, shuffle=True, num_workers=4, worker_init_fn=seed_worker)
 
-  history.append(train_model(model_name+lang, model, trainloader, devloader, epoches, lr, decay, output))
+  history.append(train_model(f'{model_name}_{lang}', model, trainloader, devloader, epoches, lr, decay, output))
 
   del trainloader
   del model
