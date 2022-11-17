@@ -152,7 +152,7 @@ def backTranslation(sourceFile = 'data/train_inverted.csv', step=29) -> None:
 def evaluate(file_path):
 
 
-  sources = ['HaHackathon', 'joker', 'hedlines', 'Haha']
+  sources = ['HaHackathon', 'joker', 'headlines', 'Haha']
 
   file = pd.read_csv(file_path)
 
