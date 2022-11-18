@@ -37,6 +37,12 @@ python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv
 # python main.py -model encoder -mode predict -wm online -l en -bs 64 -df data/test_inverted.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_es.pt
 # python main.py -model encoder -mode predict -wm online -l es -bs 64 -df data/test_back.csv -output logs -wp logs/bert-base-multilingual-uncased-sentiment_es.pt
 
+
+#Aqui chequeamos inverted mejor en multilingue o que ? este es monoloingue
+python main.py -model encoder -mode predict -wm online -l es -bs 64 -df data/test_inverted.csv -output logs -wp logs/bertweet-base_en.pt
+python main.py -model encoder -mode predict -wm online -l en -bs 64 -df data/test_inverted.csv -output logs -wp logs/beto-sentiment-analysis_es.pt
+
+
 # # Predict test - train
 # python main.py -model encoder -mode predict -wm online -l en -bs 64 -df data/test.csv -output logs -wp logs/bertweet-base_1.pt
 # python main.py -model encoder -mode predict -wm online -l es -bs 64 -df data/test.csv -output logs -wp logs/bert-base-spanish-wwm-cased_1.pt
