@@ -17,7 +17,7 @@ def load_data(filename, lang, interest_data = None):
     elif lang == 'en':
       dataframe = dataframe[dataframe['source'] != 'Haha']
 
-  print(interest_data, set(dataframe[interest_data].to_list()))
+  print(interest_data, set(dataframe['source'].to_list()))
 
   data = {key:dataframe[key].to_numpy() if key != 'humor' else dataframe['humor'].astype(int).to_numpy() for key in dataframe.columns}
   return data
