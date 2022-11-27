@@ -239,7 +239,8 @@ def train_model_CV(model_name, lang, data, splits = 5, epoches = 4, batch_size =
 
 
 def train_model_dev(model_name, lang, data_train, data_dev, epoches = 4, batch_size = 8, max_length = 120, 
-                    interm_layer_size = 64, lr = 1e-5,  decay=2e-5, output='logs', model_mode='offline'):
+                    interm_layer_size = 64, lr = 1e-5,  decay=2e-5, output='logs', model_mode='offline', 
+                    interest_data=''):
 
   history = []
   
@@ -250,7 +251,7 @@ def train_model_dev(model_name, lang, data_train, data_dev, epoches = 4, batch_s
   trainloader = DataLoader(Data(data_train), batch_size=batch_size, shuffle=True, num_workers=4, worker_init_fn=seed_worker)
   devloader = DataLoader(Data(data_dev), batch_size=batch_size, shuffle=True, num_workers=4, worker_init_fn=seed_worker)
 
-  history.append(train_model(f'{model_name}_{lang}', model, trainloader, devloader, epoches, lr, decay, output))
+  history.append(train_model(f'{model_name}_{lang}{interest_data}', model, trainloader, devloader, epoches, lr, decay, output))
 
   del trainloader
   del model

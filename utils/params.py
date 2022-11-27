@@ -1,8 +1,8 @@
 
 class params:
 
-  models = {'fr': 'flaubert/flaubert_base_cased', 'en': 'vinai/bertweet-base',
-            'es':'finiteautomata/beto-sentiment-analysis', 'de':'oliverguhr/german-sentiment-bert',
+  models = {'fr': 'flaubert/flaubert_base_cased', 'en': 'nlptown/bert-base-multilingual-uncased-sentiment',
+            'es':'nlptown/bert-base-multilingual-uncased-sentiment', 'de':'oliverguhr/german-sentiment-bert',
             'it': 'dbmdz/bert-base-italian-uncased', 'pt':'neuralmind/bert-base-portuguese-cased', 'ml':'nlptown/bert-base-multilingual-uncased-sentiment'}
   
   LR, DECAY = 1e-5,  2e-5

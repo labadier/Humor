@@ -42,7 +42,8 @@ def check_params(args=None):
   parser.add_argument('-df', metavar='test_file', 
        help='Data anotation files for testing')
   parser.add_argument('-wp', metavar='weigths_path', default="logs",
-       help='Saved weights Path')
+       help='Saved weights Path')  
+  parser.add_argument('-id', metavar='interest_data', help='Interest data', default='')
 
   return parser.parse_args(args)
 
@@ -69,6 +70,7 @@ if __name__ == '__main__':
   tf = parameters.tf
   df=parameters.df
 
+  interest_data = parameters.id
   weights_path = parameters.wp
   
 
@@ -81,7 +83,7 @@ if __name__ == '__main__':
       if os.path.exists(output) == False:
         os.system(f'mkdir {output}')
 
-      dataTrain = load_data(tf, lang)
+      dataTrain = load_data(tf, lang, interest_data)
       history = None
       
       if df is None:
@@ -89,11 +91,11 @@ if __name__ == '__main__':
                       batch_size=batch_size, max_length=max_length, interm_layer_size = interm_layer_size, 
                       lr = learning_rate,  decay=decay, output=output, model_mode=weights_mode)
       else:
-        dataDev = load_data(df, lang)
+        dataDev = load_data(df, lang, interest_data)
         history = train_model_dev(model_name=params.models[lang].split('/')[-1], lang=lang, data_train=dataTrain, data_dev=dataDev,
                       epoches=epoches, batch_size=batch_size, max_length=max_length, 
                       interm_layer_size = interm_layer_size, lr = learning_rate,  decay=decay, 
-                      output=output, model_mode=weights_mode)
+                      output=output, model_mode=weights_mode, interest_data=f'_{interest_data}')
       
       print(f"{bcolors.OKCYAN}{bcolors.BOLD}Training Finished for {lang.upper()} Model{bcolors.ENDC}")
       plot_training(history[-1], f'lm_{lang}', 'loss')

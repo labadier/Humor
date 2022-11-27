@@ -5,13 +5,19 @@ from matplotlib import pyplot as plt
 
 from googletrans import Translator 
 
-def load_data(filename, lang):
+def load_data(filename, lang, interest_data = None):
+
 
   dataframe = pd.read_csv(filename, dtype=str)
-  if lang == 'es':
-    dataframe = dataframe[dataframe['source'] == 'Haha']
-  elif lang == 'en':
-    dataframe = dataframe[dataframe['source'] != 'Haha']
+  if interest_data is not None:
+    dataframe = dataframe[dataframe['source'] == interest_data]
+  else:
+    if lang == 'es':
+      dataframe = dataframe[dataframe['source'] == 'Haha']
+    elif lang == 'en':
+      dataframe = dataframe[dataframe['source'] != 'Haha']
+
+  print(interest_data, set(dataframe['h1'].to_list()))
 
   data = {key:dataframe[key].to_numpy() if key != 'humor' else dataframe['humor'].astype(int).to_numpy() for key in dataframe.columns}
   return data
