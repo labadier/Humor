@@ -5,7 +5,7 @@ for i in range(3):
   for j in ['Haha', 'HaHackathon', 'joker', 'headlines']:
     os.system(f'\
     python main.py -model encoder -mode predict -wm online -bs 64 -df data/test.csv -output preds/{params.model_mult[i]} \
-    -id {j} -desc {j} -wp logs/{params.model_mult[i]}/{params.model_mult[i]}_{j}.pt\
+    -id {j} -desc {j} -mi {j} -wp logs/{params.model_mult[i]}/{params.model_mult[i]}_{j}.pt\
       ')
 
 # for i in range(3):

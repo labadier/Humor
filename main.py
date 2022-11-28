@@ -119,7 +119,7 @@ if __name__ == '__main__':
       Path(output).mkdir(parents=True, exist_ok=True)
       outputFile = os.path.join(output, outputFile) + f'_{interest_data}_{mode}.csv'
 
-      model_params = {'mode':weights_mode, 'lang':lang}
+      model_params = {'mode':weights_mode, 'lang':lang, 'model_index':model_index}
       model = SeqModel(interm_layer_size, max_length, **model_params)
       model.evaluate(data=dataDev, batch_size=batch_size, wp= weights_path, outputFile = outputFile, encode=(mode == 'encodings'))
       
