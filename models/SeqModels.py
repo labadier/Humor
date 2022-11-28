@@ -29,7 +29,7 @@ def HugginFaceLoad(language, weigths_source, model_index):
 
   prefix = 'data' if weigths_source == 'offline' else ''
   model = AutoModel.from_pretrained(os.path.join(prefix , params.models[language][model_index]))
-  tokenizer = AutoTokenizer.from_pretrained(os.path.join(prefix , params.models[language]), do_lower_case=True, TOKENIZERS_PARALLELISM=True)
+  tokenizer = AutoTokenizer.from_pretrained(os.path.join(prefix , params.models[language][model_index]), do_lower_case=True, TOKENIZERS_PARALLELISM=True)
 
   return model, tokenizer
 
