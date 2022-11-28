@@ -4,6 +4,7 @@ from utils.params import params, bcolors
 from utils.utils import mergeData, TranslatePivotLang, backTranslation
 from utils.utils import load_data, plot_training, evaluate
 from models.SeqModels import train_model_CV, SeqModel, train_model_dev
+from pathlib import Path
 
 torch.manual_seed(0)
 random.seed(0)
@@ -44,6 +45,7 @@ def check_params(args=None):
   parser.add_argument('-wp', metavar='weigths_path', default="logs",
        help='Saved weights Path')  
   parser.add_argument('-id', metavar='interest_data', help='Interest data', default='')
+  parser.add_argument('-mi', metavar='model_index', type = int,  help='Model index on List', default=2)
 
   return parser.parse_args(args)
 
@@ -72,13 +74,15 @@ if __name__ == '__main__':
 
   interest_data = parameters.id
   weights_path = parameters.wp
-  
+
+  model_index = parameters.mi  
 
   if model == 'encoder':
 
     if mode == 'train':
-
-      output = os.path.join(output, 'logs')
+      
+      output = os.path.join('logs', params.models[lang][model_index].split('/')[-1])
+      Path(output).mkdir(parents=True, exist_ok=True)
 
       if os.path.exists(output) == False:
         os.system(f'mkdir {output}')
@@ -87,15 +91,17 @@ if __name__ == '__main__':
       history = None
       
       if df is None:
-        history = train_model_CV(model_name=params.models[lang].split('/')[-1], lang=lang, data=dataTrain, splits=splits, epoches=epoches, 
+        history = train_model_CV(model_name=params.models[lang][model_index].split('/')[-1], lang=lang, data=dataTrain, splits=splits, epoches=epoches, 
                       batch_size=batch_size, max_length=max_length, interm_layer_size = interm_layer_size, 
-                      lr = learning_rate,  decay=decay, output=output, model_mode=weights_mode)
+                      lr = learning_rate,  decay=decay, output=output, model_mode=weights_mode,
+                      model_index = model_index)
       else:
         dataDev = load_data(df, lang, interest_data)
-        history = train_model_dev(model_name=params.models[lang].split('/')[-1], lang=lang, data_train=dataTrain, data_dev=dataDev,
+        history = train_model_dev(model_name=params.models[lang][model_index].split('/')[-1], lang=lang, data_train=dataTrain, data_dev=dataDev,
                       epoches=epoches, batch_size=batch_size, max_length=max_length, 
                       interm_layer_size = interm_layer_size, lr = learning_rate,  decay=decay, 
-                      output=output, model_mode=weights_mode, interest_data=f'_{interest_data}')
+                      output=output, model_mode=weights_mode, interest_data=f'_{interest_data}', 
+                      model_index=model_index)
       
       print(f"{bcolors.OKCYAN}{bcolors.BOLD}Training Finished for {lang.upper()} Model{bcolors.ENDC}")
       plot_training(history[-1], f'lm_{lang}', 'loss')

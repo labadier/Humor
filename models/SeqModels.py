@@ -25,10 +25,10 @@ class Data(Dataset):
     return ret
    
 
-def HugginFaceLoad(language, weigths_source):
+def HugginFaceLoad(language, weigths_source, model_index):
 
   prefix = 'data' if weigths_source == 'offline' else ''
-  model = AutoModel.from_pretrained(os.path.join(prefix , params.models[language]))
+  model = AutoModel.from_pretrained(os.path.join(prefix , params.models[language][model_index]))
   tokenizer = AutoTokenizer.from_pretrained(os.path.join(prefix , params.models[language]), do_lower_case=True, TOKENIZERS_PARALLELISM=True)
 
   return model, tokenizer
@@ -49,7 +49,7 @@ class SeqModel(torch.nn.Module):
     self.lang = kwargs['lang']
     self.max_length = max_length
     self.interm_neurons = interm_size
-    self.transformer, self.tokenizer = HugginFaceLoad( kwargs['lang'], self.mode)
+    self.transformer, self.tokenizer = HugginFaceLoad( kwargs['lang'], self.mode, kwargs['model_index'])
     self.intermediate = torch.nn.Sequential(torch.nn.Linear(in_features=768, out_features=self.interm_neurons), torch.nn.LeakyReLU(),
                                             torch.nn.Linear(in_features=self.interm_neurons, out_features=self.interm_neurons>>1),
                                             torch.nn.LeakyReLU())
@@ -214,13 +214,13 @@ def train_model(model_name, model, trainloader, devloader, epoches, lr, decay, o
   return {'loss': eloss, 'f1': eacc, 'dev_loss': edev_loss, 'dev_f1': edev_acc}
 
 
-def train_model_CV(model_name, lang, data, splits = 5, epoches = 4, batch_size = 8, max_length = 120, 
+def train_model_CV(model_name, lang, data, model_index, splits = 5, epoches = 4, batch_size = 8, max_length = 120, 
                     interm_layer_size = 64, lr = 1e-5,  decay=2e-5, output='logs', model_mode='offline'):
 
   history = []
   skf = StratifiedKFold(n_splits=splits, shuffle=True, random_state = 23)
   
-  model_params = {'mode':model_mode, 'lang':lang}
+  model_params = {'mode':model_mode, 'lang':lang, 'model_index':model_index}
   for i, (train_index, test_index) in enumerate(skf.split(data['text'], data['humor'])):  
     
     history.append({'loss': [], 'acc':[], 'dev_loss': [], 'dev_acc': []})
@@ -238,13 +238,13 @@ def train_model_CV(model_name, lang, data, splits = 5, epoches = 4, batch_size =
   return history
 
 
-def train_model_dev(model_name, lang, data_train, data_dev, epoches = 4, batch_size = 8, max_length = 120, 
+def train_model_dev(model_name, lang, data_train, data_dev, model_index, epoches = 4, batch_size = 8, max_length = 120, 
                     interm_layer_size = 64, lr = 1e-5,  decay=2e-5, output='logs', model_mode='offline', 
                     interest_data=''):
 
   history = []
   
-  model_params = {'mode':model_mode, 'lang':lang}
+  model_params = {'mode':model_mode, 'lang':lang, 'model_index':model_index}
   history.append({'loss': [], 'acc':[], 'dev_loss': [], 'dev_acc': []})
   model = SeqModel(interm_layer_size, max_length, **model_params)
 

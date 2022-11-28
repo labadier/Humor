@@ -1,9 +1,14 @@
 
 class params:
 
-  models = {'fr': 'flaubert/flaubert_base_cased', 'en': 'nlptown/bert-base-multilingual-uncased-sentiment',
-            'es':'nlptown/bert-base-multilingual-uncased-sentiment', 'de':'oliverguhr/german-sentiment-bert',
-            'it': 'dbmdz/bert-base-italian-uncased', 'pt':'neuralmind/bert-base-portuguese-cased', 'ml':'nlptown/bert-base-multilingual-uncased-sentiment'}
+  model_mult = ['TajaKuzman/xlm-roberta-base-multilingual-text-genres', 
+                'bert-base-multilingual-cased',
+                'nlptown/bert-base-multilingual-uncased-sentiment',
+                ]
+  
+  models = {'fr': 'flaubert/flaubert_base_cased', 'en': model_mult,
+            'es': model_mult, 'de':'oliverguhr/german-sentiment-bert', 'it': 'dbmdz/bert-base-italian-uncased', 
+            'pt':'neuralmind/bert-base-portuguese-cased', 'ml':model_mult}
   
   LR, DECAY = 1e-5,  2e-5
   SPLITS = 5
