@@ -1,7 +1,7 @@
 
 class params:
 
-  model_mult = ['TajaKuzman/xlm-roberta-base-multilingual-text-genres', 
+  model_mult = ['distilbert-base-multilingual-cased', 
                 'bert-base-multilingual-cased',
                 'nlptown/bert-base-multilingual-uncased-sentiment',
                 ]
