@@ -106,7 +106,7 @@ class SeqModel(torch.nn.Module):
     #   return torch.optim.Adam(self.parameters(), lr=lr, weight_decay=decay)
 
     params = [] 
-    for l in self.transformer.encoder.layer if self.index else self.transformer.layer:
+    for l in self.transformer.encoder.layer if self.index else self.transformer.transformer.layer:
 
       params.append({'params':l.parameters(), 'lr':lr*multiplier}) 
       multiplier += increase
