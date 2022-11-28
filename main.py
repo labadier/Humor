@@ -44,7 +44,8 @@ def check_params(args=None):
        help='Data anotation files for testing')
   parser.add_argument('-wp', metavar='weigths_path', default="logs",
        help='Saved weights Path')  
-  parser.add_argument('-id', metavar='interest_data', help='Interest data', default='')
+  parser.add_argument('-id', metavar='interest_data', help='Interest data', default=None)
+  parser.add_argument('-desc', metavar='model_description', help='model_description', default=None)
   parser.add_argument('-mi', metavar='model_index', type = int,  help='Model index on List', default=2)
 
   return parser.parse_args(args)
@@ -77,6 +78,8 @@ if __name__ == '__main__':
 
   model_index = parameters.mi  
 
+  desc = '' if parameters.desc is None else f'_{parameters.desc}'
+
   if model == 'encoder':
 
     if mode == 'train':
@@ -91,7 +94,7 @@ if __name__ == '__main__':
       history = None
       
       if df is None:
-        history = train_model_CV(model_name=params.models[lang][model_index].split('/')[-1], lang=lang, data=dataTrain, splits=splits, epoches=epoches, 
+        history = train_model_CV(model_name=params.models[lang][model_index].split('/')[-1] + desc, lang=lang, data=dataTrain, splits=splits, epoches=epoches, 
                       batch_size=batch_size, max_length=max_length, interm_layer_size = interm_layer_size, 
                       lr = learning_rate,  decay=decay, output=output, model_mode=weights_mode,
                       model_index = model_index)
