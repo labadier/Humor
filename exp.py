@@ -3,10 +3,10 @@ from utils.params import params
 
 for i in range(3):
   for j in ['Haha', 'HaHackathon', 'joker', 'headlines']:
-    os.system(f'\
-    python main.py -model encoder -mode predict -wm online -bs 64 -df data/test.csv -output preds/{params.model_mult[i]} \
-    -id {j} -desc {j} -mi {j} -wp logs/{params.model_mult[i]}/{params.model_mult[i]}_{j}.pt\
-      ')
+    os.system(f"\
+    python main.py -model encoder -mode predict -wm online -l ml  -bs 64 -df data/test.csv -output preds/{params.model_mult[i]} \
+    -id {j} -desc {j} -mi {i} -wp logs/{params.models['ml'][i].split('/')[-1]}/{params.models['ml'][i].split('/')[-1]}_ml_{j}.pt\
+      ")
 
 # for i in range(3):
 #   for j in ['Haha', 'HaHackathon', 'joker', 'headlines']:
