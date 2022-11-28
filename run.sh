@@ -6,8 +6,8 @@
 
 # #Train Models
 # #monolingual - en
-python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l en -bs 64 -epoches 8 -df data/test.csv -id HaHackathon
-python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l en -bs 64 -epoches 8 -df data/test.csv -id headlines
+python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train_inverted.csv -l es -bs 64 -epoches 8 -df data/test_inverted.csv -id HaHackathon
+python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train_inverted.csv -l es -bs 64 -epoches 8 -df data/test_inverted.csv -id headlines
 
 # #monolingual - es
 # python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l es -bs 64 -epoches 8 -df data/test.csv
