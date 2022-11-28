@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
     if mode in ['encode', 'predict']:
 
-      dataDev = load_data(df, lang)
+      dataDev = load_data(df, lang, interest_data)
       mode = 'encodings' if mode == 'encode' else 'preds'
 
       outputFile = df.split('/')[-1].split('.')[0]
