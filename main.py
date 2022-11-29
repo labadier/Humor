@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
       outputFile = df.split('/')[-1].split('.')[0]
       Path(output).mkdir(parents=True, exist_ok=True)
-      outputFile = os.path.join(output, outputFile) + f'_{interest_data}_{mode}.csv'
+      outputFile = os.path.join(output, outputFile) + f'_{desc}_{mode}.csv'
 
       model_params = {'mode':weights_mode, 'lang':lang, 'model_index':model_index}
       model = SeqModel(interm_layer_size, max_length, **model_params)
