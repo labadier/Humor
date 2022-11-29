@@ -100,10 +100,10 @@ if __name__ == '__main__':
                       model_index = model_index)
       else:
         dataDev = load_data(df, lang, interest_data)
-        history = train_model_dev(model_name=params.models[lang][model_index].split('/')[-1], lang=lang, data_train=dataTrain, data_dev=dataDev,
+        history = train_model_dev(model_name=params.models[lang][model_index].split('/')[-1] + desc, lang=lang, data_train=dataTrain, data_dev=dataDev,
                       epoches=epoches, batch_size=batch_size, max_length=max_length, 
                       interm_layer_size = interm_layer_size, lr = learning_rate,  decay=decay, 
-                      output=output, model_mode=weights_mode, interest_data=f'_{interest_data}', 
+                      output=output, model_mode=weights_mode, interest_data= f'_{interest_data}' if interest_data is not None else '' , 
                       model_index=model_index)
       
       print(f"{bcolors.OKCYAN}{bcolors.BOLD}Training Finished for {lang.upper()} Model{bcolors.ENDC}")
