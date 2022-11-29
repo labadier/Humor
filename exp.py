@@ -9,7 +9,7 @@ for i in range(3):
 
       os.system(f'\
       python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l ml -bs 64 -epoches 8 -df data/test.csv -mi {i}\
-      -id {interest[j]}/{interest[k]} -desc {interest[j]}_{interest[k]}\
+      -id {interest[j]}_{interest[k]} -desc {interest[j]}_{interest[k]}\
         ')
 
 # for i in range(3):
