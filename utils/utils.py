@@ -11,7 +11,7 @@ def load_data(filename, lang, interest_data = None):
   dataframe = pd.read_csv(filename, dtype=str)
   if interest_data is not None:
     l = interest_data.split('/')
-    dataframe = dataframe[dataframe['source'].isin(interest_data)]
+    dataframe = dataframe[dataframe['source'].isin(l)]
   else:
     if lang == 'es':
       dataframe = dataframe[dataframe['source'] == 'Haha']
