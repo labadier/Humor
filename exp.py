@@ -1,14 +1,22 @@
 import os
 from utils.params import params
 
-interest = ['HaHackathon', 'headlines']
+interest = ['HaHackathon', 'joker', 'headlines']
 for i in range(3):
-  for j in range(2):
+  
+  os.system(f"python main.py -model encoder -mode predict -wm online -l ml\
+      -bs 64 -df data/test.csv -output preds/{params.model_mult[i].split('/')[-1]} \
+      -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml_{'_'.join(interest)}.pt\
+      -desc {'_'.join(interest)} -id {'_'.join(interest)}")
 
-      os.system(f"python main.py -model encoder -mode predict -wm online -l ml\
-         -bs 64 -df data/test.csv -output preds/{params.model_mult[i].split('/')[-1]} \
-          -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml_{interest[j]}.pt\
-          -desc {interest[j]}__all ")
+# interest = ['HaHackathon', 'headlines']
+# for i in range(3):
+#   for j in range(2):
+
+#       os.system(f"python main.py -model encoder -mode predict -wm online -l ml\
+#          -bs 64 -df data/test.csv -output preds/{params.model_mult[i].split('/')[-1]} \
+#           -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml_{interest[j]}.pt\
+#           -desc {interest[j]}__all ")
 
 # interest = ['HaHackathon', 'joker', 'headlines']
 # for i in range(3):
