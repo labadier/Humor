@@ -2,19 +2,26 @@ import os
 from utils.params import params
 
 interest = ['HaHackathon', 'joker', 'headlines']
-for i in range(3):
-
-  os.system(f"python main.py -model encoder -mode predict -wm online -l ml\
-      -bs 64 -df data/test.csv -output preds_batch2/{params.model_mult[i].split('/')[-1]} \
-      -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml_{'_'.join(interest)}.pt\
-      -desc cross_ling_from_engl -id {'Haha'}")
 
 for i in range(3):
+   os.system(f"\
+   python main.py -model encoder -mode predict -wm online -l ml  -desc inverted -bs 64 \
+    -df data/test_invertred.csv -output preds_batch2/{params.model_mult[i].split('/')[-1]} \
+      -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml.pt")
 
-  os.system(f"python main.py -model encoder -mode predict -wm online -l ml\
-      -bs 64 -df data/test.csv -output preds_batch2/{params.model_mult[i].split('/')[-1]} \
-      -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml_HaHa.pt\
-      -desc cross_ling_from_spa -id {'_'.join(interest)}")
+
+# for i in range(3):
+#   os.system(f"python main.py -model encoder -mode predict -wm online -l ml\
+#       -bs 64 -df data/test_inverted.csv -output preds_batch2/{params.model_mult[i].split('/')[-1]} \
+#       -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml_{'_'.join(interest)}.pt\
+#       -desc inverted_over_eng -id {'Haha'}")
+
+# for i in range(3):
+
+#   os.system(f"python main.py -model encoder -mode predict -wm online -l ml\
+#       -bs 64 -df data/test_inverted.csv -output preds_batch2/{params.model_mult[i].split('/')[-1]} \
+#       -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml_Haha.pt\
+#       -desc inverted_over_spa -id {'_'.join(interest)}")
 
   # os.system(f"\
   #    python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l ml -bs 64 -epoches 8 -df data/test.csv -mi {i}\
