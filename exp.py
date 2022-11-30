@@ -3,11 +3,16 @@ from utils.params import params
 
 interest = ['HaHackathon', 'joker', 'headlines']
 for i in range(3):
-  
+
   os.system(f"python main.py -model encoder -mode predict -wm online -l ml\
       -bs 64 -df data/test.csv -output preds/{params.model_mult[i].split('/')[-1]} \
-      -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml_{'_'.join(interest)}.pt\
-      -desc {'_'.join(interest)} -id {'_'.join(interest)}")
+      -mi {i} -wp logs/{params.model_mult[i].split('/')[-1]}/{params.model_mult[i].split('/')[-1]}_ml_Haha.pt\
+      -desc HaHa---{'_'.join(interest)} -id {'_'.join(interest)}")
+
+  # os.system(f"\
+  #    python main.py -model encoder -mode train -lr 1e-5 -wm online -tf data/train.csv -l ml -bs 64 -epoches 8 -df data/test.csv -mi {i}\
+  #    -id {'_'.join(interest)} -desc {'_'.join(interest)}\
+  #     ")
 
 # interest = ['HaHackathon', 'headlines']
 # for i in range(3):
