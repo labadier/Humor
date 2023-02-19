@@ -1,48 +1,0 @@
-
- bert-base-multilingual-uncased-sentimenten: Epoch:  1 of 8 step 177 of 177. 100.0% loss: 0.224 acc: 0.929 | dev_loss: 0.268 dev_acc: 0.928 
-
- bert-base-multilingual-uncased-sentimenten: Epoch:  2 of 8 step 177 of 177. 100.0% loss: 0.186 acc: 0.940 | dev_loss: 0.238 dev_acc: 0.946 
-
- bert-base-multilingual-uncased-sentimenten: Epoch:  3 of 8 step 177 of 177. 100.0% loss: 0.040 acc: 0.995 | dev_loss: 0.275 dev_acc: 0.947 
-
- bert-base-multilingual-uncased-sentimenten: Epoch:  4 of 8 step 177 of 177. 100.0% loss: 0.032 acc: 0.997 | dev_loss: 0.297 dev_acc: 0.943 
-
- bert-base-multilingual-uncased-sentimenten: Epoch:  5 of 8 step 177 of 177. 100.0% loss: 0.014 acc: 0.999 | dev_loss: 0.365 dev_acc: 0.942 
-
- bert-base-multilingual-uncased-sentimenten: Epoch:  6 of 8 step 177 of 177. 100.0% loss: 0.048 acc: 0.985 | dev_loss: 0.438 dev_acc: 0.933 
-
- bert-base-multilingual-uncased-sentimenten: Epoch:  7 of 8 step 177 of 177. 100.0% loss: 0.007 acc: 1.000 | dev_loss: 0.450 dev_acc: 0.938 
-
- bert-base-multilingual-uncased-sentimenten: Epoch:  8 of 8 step 177 of 177. 100.0% loss: 0.023 acc: 0.987 | dev_loss: 0.741 dev_acc: 0.897 
-
- bert-base-multilingual-uncased-sentimentes: Epoch:  1 of 8 step 469 of 469. 100.0% loss: 0.266 acc: 0.820 | dev_loss: 0.330 dev_acc: 0.846 
-
- bert-base-multilingual-uncased-sentimentes: Epoch:  2 of 8 step 469 of 469. 100.0% loss: 0.172 acc: 0.928 | dev_loss: 0.307 dev_acc: 0.875 
-
- bert-base-multilingual-uncased-sentimentes: Epoch:  3 of 8 step 469 of 469. 100.0% loss: 0.249 acc: 0.914 | dev_loss: 0.309 dev_acc: 0.878 
-
- bert-base-multilingual-uncased-sentimentes: Epoch:  4 of 8 step 469 of 469. 100.0% loss: 0.204 acc: 0.859 | dev_loss: 0.319 dev_acc: 0.873 
-
- bert-base-multilingual-uncased-sentimentes: Epoch:  5 of 8 step 469 of 469. 100.0% loss: 0.244 acc: 0.831 | dev_loss: 0.412 dev_acc: 0.841 
-
- bert-base-multilingual-uncased-sentimentes: Epoch:  6 of 8 step 469 of 469. 100.0% loss: 0.135 acc: 0.937 | dev_loss: 0.400 dev_acc: 0.869 
-
- bert-base-multilingual-uncased-sentimentes: Epoch:  7 of 8 step 469 of 469. 100.0% loss: 0.103 acc: 0.954 | dev_loss: 0.464 dev_acc: 0.868 
-
- bert-base-multilingual-uncased-sentimentes: Epoch:  8 of 8 step 469 of 469. 100.0% loss: 0.137 acc: 0.923 | dev_loss: 0.523 dev_acc: 0.848 
-
- bert-base-multilingual-uncased-sentimentml: Epoch:  1 of 8 step 646 of 646. 100.0% loss: 0.330 acc: 0.851 | dev_loss: 0.388 dev_acc: 0.854 
-
- bert-base-multilingual-uncased-sentimentml: Epoch:  2 of 8 step 646 of 646. 100.0% loss: 0.196 acc: 0.889 | dev_loss: 0.393 dev_acc: 0.866 
-
- bert-base-multilingual-uncased-sentimentml: Epoch:  3 of 8 step 646 of 646. 100.0% loss: 0.257 acc: 0.897 | dev_loss: 0.304 dev_acc: 0.909 
-
- bert-base-multilingual-uncased-sentimentml: Epoch:  4 of 8 step 646 of 646. 100.0% loss: 0.148 acc: 0.937 | dev_loss: 0.303 dev_acc: 0.918 
-
- bert-base-multilingual-uncased-sentimentml: Epoch:  5 of 8 step 646 of 646. 100.0% loss: 0.094 acc: 0.970 | dev_loss: 0.437 dev_acc: 0.902 
-
- bert-base-multilingual-uncased-sentimentml: Epoch:  6 of 8 step 646 of 646. 100.0% loss: 0.075 acc: 0.974 | dev_loss: 0.578 dev_acc: 0.885 
-
- bert-base-multilingual-uncased-sentimentml: Epoch:  7 of 8 step 646 of 646. 100.0% loss: 0.075 acc: 0.979 | dev_loss: 0.501 dev_acc: 0.898 
-
- bert-base-multilingual-uncased-sentimentml: Epoch:  8 of 8 step 646 of 646. 100.0% loss: 0.068 acc: 0.971 | dev_loss: 0.478 dev_acc: 0.898 
